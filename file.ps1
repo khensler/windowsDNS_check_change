@@ -30,3 +30,21 @@ foreach ($result in $results){
 	Set-DnsClientServerAddress -interfaceindex $results.InterfaceIndex -serveraddresses $newDNS -CimSession (new-cimsession -computername $result.PSComputerName)
 	write-host "--------------------------------"
 }
+
+
+#-------------------------------------------------
+#This will set DNS on the interfaces it finds ignoring the loopback interfaces
+#change the $newDNS parameter to be correct.  Run as admin on machine
+#-------------------------------------------------
+
+$newDNS = ("dnsip2","dnsip1")
+
+$results = Get-DnsClientServerAddress -addressfamily ipv4 | where-object {$_.InterfaceAlias -notlike "Loopback*"}
+foreach ($result in $results){
+	write-host "Server:      "$result.PSComputerName.toString()
+	Write-host "Current DNS: "$result.ServerAddresses
+	Write-Host "Interface:   "$result.InterfaceIndex.toString()
+	write-host "Setting To:  "$newDNS
+	Set-DnsClientServerAddress -interfaceindex $results.InterfaceIndex -serveraddresses $newDNS
+	write-host "--------------------------------"
+}
