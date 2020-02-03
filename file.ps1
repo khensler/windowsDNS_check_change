@@ -41,7 +41,6 @@ $newDNS = ("dnsip2","dnsip1")
 
 $results = Get-DnsClientServerAddress -addressfamily ipv4 | where-object {$_.InterfaceAlias -notlike "Loopback*"}
 foreach ($result in $results){
-	write-host "Server:      "$result.PSComputerName.toString()
 	Write-host "Current DNS: "$result.ServerAddresses
 	Write-Host "Interface:   "$result.InterfaceIndex.toString()
 	write-host "Setting To:  "$newDNS
