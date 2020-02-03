@@ -33,8 +33,9 @@ foreach ($result in $results){
 
 
 #-------------------------------------------------
+#This is to be run localy as admin.  You must use run as administrator
 #This will set DNS on the interfaces it finds ignoring the loopback interfaces
-#change the $newDNS parameter to be correct.  Run as admin on machine
+#change the $newDNS parameter to be correct. 
 #-------------------------------------------------
 
 $newDNS = ("dnsip2","dnsip1")
